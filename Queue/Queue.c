@@ -29,21 +29,32 @@ int isFull(Queue *p){
 
 void Push(Queue *p,int k){
     //判满
-    if(isFull(p)==0) return ;
+    if(isFull(p)==1) return ;
 
     p->data[p->r++] = k;
 }
 
 void Pop(Queue *p){
     //判空
-    if(isEmpty(p)==0) return ;
+    if(isEmpty(p)==1) return ;
 
     p->f++;
 }
 
+void Print(Queue *p){
+    for(int i = p->f;i < p->r;i++){
+        printf("%d  ",p->data[i]);
+    }
+    printf("\n");
+}
+
 int main(){
-    Queue *queue = Initqueue();
-
-
+    Queue *p = Initqueue(); 
+    Push(p,1);
+    Push(p,2);
+    Push(p,3);
+    Print(p);
+    Pop(p);
+    Print(p);
     return 0;
 }
