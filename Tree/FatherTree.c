@@ -70,10 +70,6 @@ int main(){
     }
     printf("寻找儿子节点\n");
     getChile('A');
-
-
-
-
     return 0;
 }
 /*
