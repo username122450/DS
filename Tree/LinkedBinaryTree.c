@@ -56,6 +56,74 @@ void Delete(BTree t){
     free(t);
 }
 
+//链式队列节点的结构体声明
+typedef struct Node02{
+    BTNode *data;
+    struct Node02 *next;
+}QNode,*QHNode;
+
+//链式队列的结构体声明
+typedef struct {
+    QHNode gront;
+    QHNode rear;
+}Queue;
+
+//链式队列的初始化
+Queue* InitQUeue(){
+    Queue *q = (Queue *)malloc(sizeof(Queue));
+    q->gront = q->rear = (QHNode)malloc(sizeof(QNode));
+    q->gront->next = NULL;
+    return q;
+}
+
+//链式队列入队使用尾插法
+void Push(Queue* q,BTNode *element){
+    QNode *s = (QNode *)malloc(sizeof(QNode));
+    s->data = element;
+    s->next = NULL;
+    q->rear->next = s;
+    q->rear = s;
+    printf("%c入队\n",element->data);
+}
+
+int isEmpty(Queue *q){
+    if(q->gront == q->rear) return 1;
+    return 0;
+}
+
+//二叉树广度遍历，元素出队时将元素的左右子节点入队
+void Pop(Queue* q){
+    if(isEmpty(q) == 1) {
+        printf("队空\n");
+        return ;
+    }
+    QNode *s = q->gront->next;
+    q->gront->next = s->next;
+    if(q->gront->next == NULL){
+        q->rear = q->gront;
+    }
+    printf("%c  ",s->data->data);
+    if(s->data->l != NULL){
+        Push(q,s->data->l);
+    }
+    if(s->data->r != NULL){
+        Push(q,s->data->r);
+    }
+    
+    free(s);
+    s = NULL;
+}
+
+//链式二叉树基于链式队列的广度优先遍历
+void QueueTraverse(BTree t){
+    Queue *q = InitQUeue();
+    Push(q,t);
+    while(isEmpty(q) != 1){
+        Pop(q);
+    }
+    printf("循环完毕\n");
+}
+
 int main() {
     BTree root = InitTree('A');
     
@@ -63,6 +131,8 @@ int main() {
     Insert(root, 'C', 'A', 1);  
     Insert(root, 'D', 'B', 0);  
     Insert(root, 'E', 'B', 1);  
+
+    QueueTraverse(root);
     
     Delete(root);
     
