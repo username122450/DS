@@ -64,15 +64,15 @@ typedef struct Node02{
 
 //链式队列的结构体声明
 typedef struct {
-    QHNode gront;
+    QHNode front;
     QHNode rear;
 }Queue;
 
 //链式队列的初始化
 Queue* InitQUeue(){
     Queue *q = (Queue *)malloc(sizeof(Queue));
-    q->gront = q->rear = (QHNode)malloc(sizeof(QNode));
-    q->gront->next = NULL;
+    q->front = q->rear = (QHNode)malloc(sizeof(QNode));
+    q->front->next = NULL;
     return q;
 }
 
@@ -83,11 +83,11 @@ void Push(Queue* q,BTNode *element){
     s->next = NULL;
     q->rear->next = s;
     q->rear = s;
-    printf("%c入队\n",element->data);
+    // printf("%c入队\n",element->data);
 }
 
 int isEmpty(Queue *q){
-    if(q->gront == q->rear) return 1;
+    if(q->front == q->rear) return 1;
     return 0;
 }
 
@@ -97,10 +97,10 @@ void Pop(Queue* q){
         printf("队空\n");
         return ;
     }
-    QNode *s = q->gront->next;
-    q->gront->next = s->next;
-    if(q->gront->next == NULL){
-        q->rear = q->gront;
+    QNode *s = q->front->next;
+    q->front->next = s->next;
+    if(q->front->next == NULL){
+        q->rear = q->front;
     }
     printf("%c  ",s->data->data);
     if(s->data->l != NULL){
