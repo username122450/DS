@@ -124,17 +124,56 @@ void QueueTraverse(BTree t){
     printf("循环完毕\n");
 }
 
+//先序遍历
+void Preorder(BTree t){
+    if(t == NULL) return ;
+    printf("%c  ",t->data);
+    Preorder(t->l);
+    Preorder(t->r);
+}
+
+//中序遍历
+void Inorder(BTree t){
+    if(t == NULL) return ;
+    Inorder(t->l);
+    printf("%c  ",t->data);
+    Inorder(t->r);
+}
+
+//后序遍历
+void Postorder(BTree t){
+    if(t == NULL) return ;
+    Postorder(t->l);
+    Postorder(t->r);
+    printf("%c  ",t->data);
+}
+
 int main() {
     BTree root = InitTree('A');
     
     Insert(root, 'B', 'A', 0);  
-    Insert(root, 'C', 'A', 1);  
-    Insert(root, 'D', 'B', 0);  
-    Insert(root, 'E', 'B', 1);  
+    Insert(root, 'E', 'A', 1);  
+    Insert(root, 'C', 'B', 1);
+    Insert(root, 'F', 'E', 1);  
+    Insert(root, 'D', 'C', 0);  
+    Insert(root, 'G', 'F', 0);
+    Insert(root, 'H', 'G', 0);
+    Insert(root, 'K', 'G', 1);
 
-    QueueTraverse(root);
+    // QueueTraverse(root);
+    Preorder(root);
+    printf("\n");
+    Inorder(root);
+    printf("\n");
+    Postorder(root);
+    printf("\n");
     
     Delete(root);
     
     return 0;
 }
+
+
+
+
+
