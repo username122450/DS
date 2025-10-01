@@ -37,16 +37,10 @@ void Insert(Tree t,char data, char father,int flag){
         printf("父元素未找到，插入失败\n");
         return ;
     }
-    if(flag == 0){
-        fa->l = s;
-        return ;
-    }
-    else if(flag == 1){
-        fa->r = s;
-    }
-    else{
-        printf("未找到%d位置\n",flag);
-    }
+    if(flag == 0) fa->l = s;
+    else if(flag == 1) fa->r = s; 
+    else printf("未找到%d位置\n",flag);
+    
 }
 
 //非递归版先序中序后序写法(栈)
