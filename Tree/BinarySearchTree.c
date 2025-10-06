@@ -57,12 +57,12 @@ BSTNode *Insert (Tree t,int data){
     while(p != NULL ){
         pre = p;
         if(data < p->data)p = p->l;
-        else if(data == p->data) {
+        else if(data > p->data)p = p-> r;
+        else{
             printf("插入失败\n");
             free(s);
             return t;
         }
-        else p = p-> r;
     }
     if(data < pre->data) pre->l = s;
     else pre ->r = s;
@@ -70,20 +70,10 @@ BSTNode *Insert (Tree t,int data){
 }
 
 BSTNode *Insert_recursion(Tree t,int data){
-    if(t == NULL){
-        BSTNode *s = CreatNewNode(data);
-        return s;
-    }
-    if(t->data == data) {
-        printf("插入失败\n");
-        return t;
-    }
-    
-    if(t->data > data){
-        t->l = Insert_recursion(t->l,data);
-    }else if(t->data < data){
-        t->r = Insert_recursion(t->r,data);
-    }
+    if(t == NULL)return CreatNewNode(data);
+    if(t->data > data) t->l = Insert_recursion(t->l,data);
+    else if(t->data < data) t->r = Insert_recursion(t->r,data);
+    else printf("插入失败\n");
     return t;
 }
 
