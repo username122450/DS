@@ -12,10 +12,10 @@ struct{
     int w;
 }sides[105];
 
-int len;
-int minSum;
+int len;//元素个数
+int minSum;//最小生成树权值和
 
-int f[105];
+int f[105];//下标为i的元素的祖先节点下标
 
 void InitDSU(){
     for(int i = 1; i <= len; i++){
